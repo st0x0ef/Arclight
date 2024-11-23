@@ -91,9 +91,7 @@ public abstract class AnimalMixin extends AgeableMobMixin implements AnimalEntit
     @Overwrite
     public void finalizeSpawnChildFromBreeding(ServerLevel worldserver, Animal entityanimal, @Nullable AgeableMob entityageable) {
         // CraftBukkit start - call EntityBreedEvent
-        Optional<ServerPlayer> cause = Optional.ofNullable(this.getLoveCause()).or(() -> {
-            return Optional.ofNullable(entityanimal.getLoveCause());
-        });
+        Optional<ServerPlayer> cause = Optional.ofNullable(this.getLoveCause()).or(() -> Optional.ofNullable(entityanimal.getLoveCause()));
         int experience = this.random.nextInt(7) + 1;
         if (entityageable != null) {
             org.bukkit.event.entity.EntityBreedEvent entityBreedEvent = CraftEventFactory.callEntityBreedEvent(entityageable, (Animal) (Object) this, entityanimal, cause.orElse(null), this.breedItem, experience);

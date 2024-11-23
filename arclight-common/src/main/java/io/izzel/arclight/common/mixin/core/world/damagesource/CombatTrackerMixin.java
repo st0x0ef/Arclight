@@ -24,7 +24,7 @@ public class CombatTrackerMixin implements CombatTrackerBridge {
     @Inject(method = "getDeathMessage", cancellable = true, at = @At("HEAD"))
     private void arclight$useOverride(CallbackInfoReturnable<Component> cir) {
         if (!this.entries.isEmpty()) {
-            var entry = this.entries.get(this.entries.size() - 1);
+            var entry = this.entries.getLast();
             var deathMessage = ((CombatEntryBridge) (Object) entry).bridge$getDeathMessage();
             if (deathMessage != null) {
                 cir.setReturnValue(deathMessage);
@@ -41,7 +41,7 @@ public class CombatTrackerMixin implements CombatTrackerBridge {
     public void bridge$setDeathMessage(Component component) {
         this.arclight$emptyComnent = component;
         if (!this.entries.isEmpty()) {
-            var entry = this.entries.get(this.entries.size() - 1);
+            var entry = this.entries.getLast();
             ((CombatEntryBridge) (Object) entry).bridge$setDeathMessage(component);
         }
     }

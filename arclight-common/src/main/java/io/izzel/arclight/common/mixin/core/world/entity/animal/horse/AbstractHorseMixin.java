@@ -25,7 +25,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Mixin(AbstractHorse.class)
@@ -94,12 +93,12 @@ public abstract class AbstractHorseMixin extends AnimalMixin {
 
         @Shadow(aliases = {"field_48831", "this$0"}) private AbstractHorse outerThis;
 
-        public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
+        public List<HumanEntity> transaction = new java.util.ArrayList<>();
         private int maxStack = MAX_STACK;
 
         @Override
         public List<ItemStack> getContents() {
-            return Arrays.asList(this.getTheItem());
+            return List.of(this.getTheItem());
         }
 
         @Override

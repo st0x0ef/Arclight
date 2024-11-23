@@ -1,6 +1,5 @@
 package io.izzel.arclight.common.mixin.core.world.entity.ai.behavior;
 
-import io.izzel.arclight.common.bridge.core.entity.EntityBridge;
 import io.izzel.arclight.mixin.Eject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;

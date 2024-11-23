@@ -58,7 +58,7 @@ public class ArclightConfig {
     }
 
     private static void fillComments(CommentedConfigurationNode node, ArclightLocale locale) {
-        if (!node.getComment().isPresent()) {
+        if (node.getComment().isEmpty()) {
             String path = pathOf(node);
             Optional<String> option = locale.getOption("comments." + path + ".comment");
             option.ifPresent(node::setComment);

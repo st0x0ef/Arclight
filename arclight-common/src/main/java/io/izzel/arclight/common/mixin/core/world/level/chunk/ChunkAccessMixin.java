@@ -85,9 +85,7 @@ public abstract class ChunkAccessMixin implements BlockGetter, BiomeManager.Nois
             CrashReport crashreport = CrashReport.forThrowable(throwable, "Setting biome");
             CrashReportCategory crashreportsystemdetails = crashreport.addCategory("Biome being set");
 
-            crashreportsystemdetails.setDetail("Location", () -> {
-                return CrashReportCategory.formatLocation(this, i, j, k);
-            });
+            crashreportsystemdetails.setDetail("Location", () -> CrashReportCategory.formatLocation(this, i, j, k));
             throw new ReportedException(crashreport);
         }
     }

@@ -33,6 +33,6 @@ public abstract class ServerConfigurationPacketListenerImplMixin_NeoForge extend
 
     @Redirect(method = "handlePong", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerConfigurationPacketListenerImpl;runConfiguration()V"))
     private void arclight$runConfigurationMainThread(ServerConfigurationPacketListenerImpl instance) {
-        ArclightServer.executeOnMainThread(() -> this.runConfiguration());
+        ArclightServer.executeOnMainThread(this::runConfiguration);
     }
 }

@@ -27,9 +27,7 @@ public abstract class PressurePlateBlockMixin extends BasePressurePlateBlockMixi
     // @formatter:on
 
     private static <T extends Entity> java.util.List<T> getEntities(Level world, AABB axisalignedbb, Class<T> oclass) {
-        return world.getEntitiesOfClass(oclass, axisalignedbb, EntitySelector.NO_SPECTATORS.and((entity) -> {
-            return !entity.isIgnoringBlockTriggers();
-        }));
+        return world.getEntitiesOfClass(oclass, axisalignedbb, EntitySelector.NO_SPECTATORS.and((entity) -> !entity.isIgnoringBlockTriggers()));
     }
 
     /**
@@ -38,20 +36,13 @@ public abstract class PressurePlateBlockMixin extends BasePressurePlateBlockMixi
      */
     @Overwrite
     protected int getSignalStrength(Level world, BlockPos blockposition) {
-        Class<? extends Entity> oclass; // CraftBukkit
+        Class<? extends Entity> oclass = switch (this.type.pressurePlateSensitivity()) {
+            case EVERYTHING -> Entity.class;
+            case MOBS -> LivingEntity.class;
+            default -> throw new IncompatibleClassChangeError();
+        }; // CraftBukkit
 
-        switch (this.type.pressurePlateSensitivity()) {
-            case EVERYTHING:
-                oclass = Entity.class;
-                break;
-            case MOBS:
-                oclass = LivingEntity.class;
-                break;
-            default:
-                throw new IncompatibleClassChangeError();
-        }
-
-        Class oclass1 = oclass;
+        Class<? extends Entity> oclass1 = oclass;
 
         // CraftBukkit start - Call interact event when turning on a pressure plate
         for (Entity entity : getEntities(world, TOUCH_AABB.move(blockposition), oclass)) {

@@ -21,9 +21,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class WeightedPressurePlateBlockMixin extends BasePressurePlateBlockMixin {
 
     private static <T extends Entity> java.util.List<T> getEntities(Level world, AABB axisalignedbb, Class<T> oclass) {
-        return world.getEntitiesOfClass(oclass, axisalignedbb, EntitySelector.NO_SPECTATORS.and((entity) -> {
-            return !entity.isIgnoringBlockTriggers();
-        }));
+        return world.getEntitiesOfClass(oclass, axisalignedbb, EntitySelector.NO_SPECTATORS.and((entity) -> !entity.isIgnoringBlockTriggers()));
     }
 
     @Redirect(method = "getSignalStrength", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/WeightedPressurePlateBlock;getEntityCount(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/phys/AABB;Ljava/lang/Class;)I"))

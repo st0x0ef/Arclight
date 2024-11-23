@@ -535,7 +535,7 @@ public abstract class ServerGamePacketListenerImplMixin extends ServerCommonPack
                                 int i = this.receivedMovePacketCount - this.knownMovePacketCount;
 
                                 // CraftBukkit start - handle custom speeds and skipped ticks
-                                this.allowedPlayerTicks += (System.currentTimeMillis() / 50) - this.lastTick;
+                                this.allowedPlayerTicks += (int) ((System.currentTimeMillis() / 50) - this.lastTick);
                                 this.allowedPlayerTicks = Math.max(this.allowedPlayerTicks, 1);
                                 this.lastTick = (int) (System.currentTimeMillis() / 50);
 
@@ -904,7 +904,7 @@ public abstract class ServerGamePacketListenerImplMixin extends ServerCommonPack
             return;
         }
         Optional<LastSeenMessages> optional = this.unpackAndApplyLastSeen(packet.lastSeenMessages());
-        if (!optional.isEmpty()) {
+        if (optional.isPresent()) {
             this.tryHandleChat(packet.message(), RunnableInPlace.wrap(() -> {
                 PlayerChatMessage playerchatmessage;
 
@@ -988,7 +988,7 @@ public abstract class ServerGamePacketListenerImplMixin extends ServerCommonPack
 
         CommandSigningContext.SignedArguments commandsigningcontext_a = new CommandSigningContext.SignedArguments(map);
 
-        parseresults = Commands.<CommandSourceStack>mapSource(parseresults, (commandlistenerwrapper) -> { // CraftBukkit - decompile error
+        parseresults = Commands.mapSource(parseresults, (commandlistenerwrapper) -> { // CraftBukkit - decompile error
             return commandlistenerwrapper.withSigningContext(commandsigningcontext_a, this.chatMessageChain);
         });
         this.server.getCommands().performCommand(parseresults, command); // CraftBukkit
@@ -1044,7 +1044,7 @@ public abstract class ServerGamePacketListenerImplMixin extends ServerCommonPack
                         return null;
                     }
                 }
-                Waitable waitable = new SyncChat();
+                Waitable<Object> waitable = new SyncChat();
                 if (async) {
                     ((MinecraftServerBridge) server).bridge$queuedProcess(waitable);
                 } else {

@@ -90,7 +90,7 @@ public class ApplicationBootstrap extends ForgeBootstrap {
                     services.stream().map(p -> p.get().name()).collect(Collectors.joining(", ")));
             }
 
-            var loader = services.get(0).get();
+            var loader = services.getFirst().get();
             loader.main(args);
         } finally {
             Thread.currentThread().setContextClassLoader(oldcl);

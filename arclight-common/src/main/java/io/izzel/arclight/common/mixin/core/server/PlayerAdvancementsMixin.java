@@ -1,7 +1,6 @@
 package io.izzel.arclight.common.mixin.core.server;
 
 import io.izzel.arclight.common.bridge.core.advancement.AdvancementBridge;
-import io.izzel.arclight.common.bridge.core.entity.EntityBridge;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.level.ServerPlayer;

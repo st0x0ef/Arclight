@@ -59,10 +59,7 @@ public abstract class BlockMixin extends BlockBehaviourMixin implements BlockBri
 
     protected int tryDropExperience(ServerLevel worldserver, BlockPos blockposition, ItemStack itemstack, IntProvider intprovider) {
         int i = EnchantmentHelper.processBlockExperience(worldserver, itemstack, intprovider.sample(worldserver.getRandom()));
-        if (i > 0) {
-            return i;
-        }
-        return 0;
+        return Math.max(i, 0);
     }
 
     @Override

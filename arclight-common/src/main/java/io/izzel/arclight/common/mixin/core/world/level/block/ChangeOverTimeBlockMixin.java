@@ -28,9 +28,7 @@ public interface ChangeOverTimeBlockMixin<T extends Enum<T>> {
     default void changeOverTime(BlockState p_311790_, ServerLevel p_309416_, BlockPos p_310092_, RandomSource p_310572_) {
         float f = 0.05688889F;
         if (p_310572_.nextFloat() < 0.05688889F) {
-            this.getNextState(p_311790_, p_309416_, p_310092_, p_310572_).ifPresent((p_153039_) -> {
-                CraftEventFactory.handleBlockFormEvent(p_309416_, p_310092_, p_153039_);
-            });
+            this.getNextState(p_311790_, p_309416_, p_310092_, p_310572_).ifPresent((p_153039_) -> CraftEventFactory.handleBlockFormEvent(p_309416_, p_310092_, p_153039_));
         }
 
     }

@@ -52,7 +52,7 @@ public class StructureStartMixin implements StructureStartBridge {
     public void placeInChunk(WorldGenLevel p_226851_, StructureManager p_226852_, ChunkGenerator p_226853_, RandomSource p_226854_, BoundingBox p_226855_, ChunkPos p_226856_) {
         List<StructurePiece> list = this.pieceContainer.pieces();
         if (!list.isEmpty()) {
-            BoundingBox boundingbox = (list.get(0)).getBoundingBox();
+            BoundingBox boundingbox = (list.getFirst()).getBoundingBox();
             BlockPos blockpos = boundingbox.getCenter();
             BlockPos blockpos1 = new BlockPos(blockpos.getX(), boundingbox.minY(), blockpos.getZ());
 

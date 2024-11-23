@@ -90,9 +90,9 @@ public abstract class LootTableMixin implements LootTableBridge {
             }
 
             if (itemstack.isEmpty()) {
-                inv.setItem(list.remove(list.size() - 1), ItemStack.EMPTY);
+                inv.setItem(list.removeLast(), ItemStack.EMPTY);
             } else {
-                inv.setItem(list.remove(list.size() - 1), itemstack);
+                inv.setItem(list.removeLast(), itemstack);
             }
         }
     }

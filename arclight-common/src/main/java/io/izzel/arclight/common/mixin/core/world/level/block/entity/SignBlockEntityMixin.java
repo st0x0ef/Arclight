@@ -64,9 +64,7 @@ public abstract class SignBlockEntityMixin extends BlockEntityMixin implements S
     @Overwrite
     public void updateSignText(Player p_278048_, boolean p_278103_, List<FilteredText> p_277990_) {
         if (!this.isWaxed() && p_278048_.getUUID().equals(this.getPlayerWhoMayEdit()) && this.level != null) {
-            this.updateText((p_277776_) -> {
-                return this.setMessages(p_278048_, p_277990_, p_277776_, p_278103_);
-            }, p_278103_);
+            this.updateText((p_277776_) -> this.setMessages(p_278048_, p_277990_, p_277776_, p_278103_), p_278103_);
             this.setAllowedPlayerEditor(null);
             this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
         } else {

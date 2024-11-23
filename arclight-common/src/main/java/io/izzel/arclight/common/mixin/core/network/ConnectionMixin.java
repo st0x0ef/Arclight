@@ -3,7 +3,6 @@ package io.izzel.arclight.common.mixin.core.network;
 import com.mojang.authlib.properties.Property;
 import io.izzel.arclight.common.bridge.core.network.NetworkManagerBridge;
 import net.minecraft.network.Connection;
-import net.minecraft.network.DisconnectionDetails;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

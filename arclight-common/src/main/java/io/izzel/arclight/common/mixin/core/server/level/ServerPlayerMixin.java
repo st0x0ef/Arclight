@@ -200,9 +200,7 @@ public abstract class ServerPlayerMixin extends PlayerMixin implements ServerPla
     }
 
     public void resendItemInHands() {
-        containerMenu.findSlot(getInventory(), getInventory().selected).ifPresent(s -> {
-            containerSynchronizer.sendSlotChange(containerMenu, s, getMainHandItem());
-        });
+        containerMenu.findSlot(getInventory(), getInventory().selected).ifPresent(s -> containerSynchronizer.sendSlotChange(containerMenu, s, getMainHandItem()));
         containerSynchronizer.sendSlotChange(inventoryMenu, InventoryMenu.SHIELD_SLOT, getOffhandItem());
     }
 
@@ -229,7 +227,7 @@ public abstract class ServerPlayerMixin extends PlayerMixin implements ServerPla
             if (j <= 1) {
                 i = 1;
             }
-            int i1 = (l = (k = (long) (i * 2 + 1)) * k) > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) l;
+            int i1 = (l = (k = (long) (i * 2L + 1)) * k) > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) l;
             int j1 = this.getCoprime(i1);
             int k1 = new Random().nextInt(i1);
             for (int l1 = 0; l1 < i1; ++l1) {
@@ -289,7 +287,7 @@ public abstract class ServerPlayerMixin extends PlayerMixin implements ServerPla
                 position = ServerPlayer.findRespawnAndUseSpawnBlock((ServerLevel) world, this.getRespawnPosition(), this.getRespawnAngle(), false, false).map(ServerPlayer.RespawnPosAngle::position).orElse(null);
             }
             if (world == null || position == null) {
-                world = ((CraftWorld) Bukkit.getServer().getWorlds().get(0)).getHandle();
+                world = ((CraftWorld) Bukkit.getServer().getWorlds().getFirst()).getHandle();
                 position = Vec3.atCenterOf(((ServerLevel) world).getSharedSpawnPos());
             }
             this.setLevel(world);

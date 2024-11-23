@@ -3,7 +3,6 @@ package io.izzel.arclight.fabric.mixin.bukkit;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.StringReader;
 import io.izzel.arclight.common.mod.server.ArclightServer;
-import net.minecraft.commands.CommandResultCallback;
 import net.minecraft.commands.CommandSourceStack;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;

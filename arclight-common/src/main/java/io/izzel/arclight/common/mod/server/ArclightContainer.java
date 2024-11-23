@@ -32,7 +32,7 @@ public class ArclightContainer {
     public static InventoryView createInvView(AbstractContainerMenu container) {
         var containerOwner = ArclightCaptures.getContainerOwner();
         Inventory viewing = createInv(containerOwner, container);
-        return new CraftInventoryView(((PlayerEntityBridge) containerOwner).bridge$getBukkitEntity(), viewing, container);
+        return new CraftInventoryView<>(((PlayerEntityBridge) containerOwner).bridge$getBukkitEntity(), viewing, container);
     }
 
     public static CraftInventory createInv(Player containerOwner, AbstractContainerMenu container) {

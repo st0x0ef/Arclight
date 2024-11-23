@@ -29,6 +29,7 @@ import java.security.Permissions;
 import java.security.ProtectionDomain;
 import java.security.SecureClassLoader;
 import java.util.Enumeration;
+import java.util.Objects;
 import java.util.StringJoiner;
 
 @SuppressWarnings("unused")
@@ -527,11 +528,7 @@ public class ArclightReflectionHandler extends ClassLoader {
 
     public static Object[] handleMethodInvoke(Method method, Object src, Object[] param) throws Throwable {
         Object[] ret = ArclightRedirectAdapter.runHandle(remapper, method, src, param);
-        if (ret != null) {
-            return ret;
-        } else {
-            return new Object[]{method, src, param};
-        }
+        return Objects.requireNonNullElseGet(ret, () -> new Object[]{method, src, param});
     }
 
     public static Object redirectMethodInvoke(Method method, Object src, Object[] param) throws Throwable {

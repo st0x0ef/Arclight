@@ -1,6 +1,5 @@
 package io.izzel.arclight.boot.asm;
 
-import cpw.mods.modlauncher.serviceapi.ILaunchPluginService;
 import org.apache.logging.log4j.jul.LogManager;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;

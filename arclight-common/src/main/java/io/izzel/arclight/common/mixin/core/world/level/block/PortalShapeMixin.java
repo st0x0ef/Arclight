@@ -82,9 +82,7 @@ public abstract class PortalShapeMixin implements PortalSizeBridge {
     private void arclight$buildPortal(CallbackInfo ci) {
         World world = ((IWorldBridge) this.level).bridge$getMinecraftWorld().bridge$getWorld();
         net.minecraft.world.level.block.state.BlockState blockState = Blocks.NETHER_PORTAL.defaultBlockState().setValue(NetherPortalBlock.AXIS, this.axis);
-        BlockPos.betweenClosed(this.bottomLeft, this.bottomLeft.relative(Direction.UP, this.height - 1).relative(this.rightDir, this.width - 1)).forEach((blockPos) -> {
-            blocks.setBlock(blockPos, blockState, 18);
-        });
+        BlockPos.betweenClosed(this.bottomLeft, this.bottomLeft.relative(Direction.UP, this.height - 1).relative(this.rightDir, this.width - 1)).forEach((blockPos) -> blocks.setBlock(blockPos, blockState, 18));
         PortalCreateEvent event = new PortalCreateEvent((java.util.List<org.bukkit.block.BlockState>) (java.util.List) this.blocks.getList(), world, null, PortalCreateEvent.CreateReason.FIRE);
         Bukkit.getPluginManager().callEvent(event);
         arclight$ret = !event.isCancelled();

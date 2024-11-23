@@ -4,7 +4,6 @@ import io.izzel.arclight.common.bridge.core.world.item.crafting.RecipeManagerBri
 import io.izzel.arclight.common.mod.server.ArclightServer;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeInput;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.v.inventory.CraftComplexRecipe;

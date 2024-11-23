@@ -24,21 +24,17 @@ public interface CraftRecipeMixin {
     @Overwrite
     default Ingredient toNMS(RecipeChoice bukkit, boolean requireNotEmpty) {
         Ingredient stack;
-        if (bukkit == null) {
-            stack = Ingredient.EMPTY;
-        } else if (bukkit instanceof RecipeChoice.MaterialChoice) {
-            stack = new Ingredient(((RecipeChoice.MaterialChoice) bukkit).getChoices().stream().map((mat) -> {
-                return new Ingredient.ItemValue(CraftItemStack.asNMSCopy(new ItemStack(mat)));
-            }));
-        } else if (bukkit instanceof RecipeChoice.ExactChoice) {
-            stack = new Ingredient(((RecipeChoice.ExactChoice) bukkit).getChoices().stream().map((mat) -> {
-                return new Ingredient.ItemValue(CraftItemStack.asNMSCopy(mat));
-            }));
-            ((IngredientBridge) (Object) stack).bridge$setExact(true);
-        } else if (bukkit instanceof ArclightSpecialIngredient) {
-            stack = ((ArclightSpecialIngredient) bukkit).getIngredient();
-        } else {
-            throw new IllegalArgumentException("Unknown recipe stack instance " + bukkit);
+        switch (bukkit) {
+            case null -> stack = Ingredient.EMPTY;
+            case RecipeChoice.MaterialChoice materialChoice ->
+                    stack = new Ingredient(materialChoice.getChoices().stream().map((mat) -> new Ingredient.ItemValue(CraftItemStack.asNMSCopy(new ItemStack(mat)))));
+            case RecipeChoice.ExactChoice exactChoice -> {
+                stack = new Ingredient(exactChoice.getChoices().stream().map((mat) -> new Ingredient.ItemValue(CraftItemStack.asNMSCopy(mat))));
+                ((IngredientBridge) (Object) stack).bridge$setExact(true);
+            }
+            case ArclightSpecialIngredient arclightSpecialIngredient ->
+                    stack = arclightSpecialIngredient.getIngredient();
+            default -> throw new IllegalArgumentException("Unknown recipe stack instance " + bukkit);
         }
 
         stack.getItems();

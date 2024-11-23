@@ -23,7 +23,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
@@ -78,7 +77,7 @@ public class PlayerDataMixin implements PlayerDataBridge {
         // s1 = entityhuman.getStringUUID(); // CraftBukkit - used above
         Path path2 = path.resolve(s1 + "_corrupted_" + LocalDateTime.now().format(FORMATTER) + s);
 
-        if (Files.isRegularFile(path1, new LinkOption[0])) {
+        if (Files.isRegularFile(path1)) {
             try {
                 Files.copy(path1, path2, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
             } catch (Exception exception) {

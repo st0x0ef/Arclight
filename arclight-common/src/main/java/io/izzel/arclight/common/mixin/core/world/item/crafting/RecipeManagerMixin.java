@@ -62,9 +62,7 @@ public abstract class RecipeManagerMixin implements RecipeManagerBridge {
     @Overwrite
     public <I extends RecipeInput, T extends Recipe<I>> Optional<RecipeHolder<T>> getRecipeFor(RecipeType<T> recipes, I i0, Level world, @Nullable RecipeHolder<T> recipeholder) {
         // CraftBukkit start
-        List<RecipeHolder<T>> list = this.byType(recipes).stream().filter((recipeholder1) -> {
-            return recipeholder1.value().matches(i0, world);
-        }).toList();
+        List<RecipeHolder<T>> list = this.byType(recipes).stream().filter((recipeholder1) -> recipeholder1.value().matches(i0, world)).toList();
         Optional<RecipeHolder<T>> recipe = (list.isEmpty() || i0.isEmpty()) ? Optional.empty() : (recipeholder != null && recipeholder.value().matches(i0, world) ? Optional.of(recipeholder) : Optional.of(list.getLast())); // CraftBukkit - SPIGOT-4638: last recipe gets priority
         return recipe;
         // CraftBukkit end

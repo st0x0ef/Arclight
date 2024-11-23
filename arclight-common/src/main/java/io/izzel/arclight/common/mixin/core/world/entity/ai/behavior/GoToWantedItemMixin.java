@@ -29,33 +29,31 @@ public abstract class GoToWantedItemMixin<E extends LivingEntity> {
     public static <E extends LivingEntity> BehaviorControl<E> create(Predicate<E> p_259490_, float p_260346_, boolean p_259637_, int p_259054_) {
         return BehaviorBuilder.create((p_258371_) -> {
             BehaviorBuilder<E, ? extends MemoryAccessor<? extends K1, WalkTarget>> behaviorbuilder = p_259637_ ? p_258371_.registered(MemoryModuleType.WALK_TARGET) : p_258371_.absent(MemoryModuleType.WALK_TARGET);
-            return p_258371_.group(p_258371_.registered(MemoryModuleType.LOOK_TARGET), behaviorbuilder, p_258371_.present(MemoryModuleType.NEAREST_VISIBLE_WANTED_ITEM), p_258371_.registered(MemoryModuleType.ITEM_PICKUP_COOLDOWN_TICKS)).apply(p_258371_, (p_258387_, p_258388_, p_258389_, p_258390_) -> {
-                return (p_258380_, p_258381_, p_258382_) -> {
-                    ItemEntity itementity = p_258371_.get(p_258389_);
-                    if (p_258371_.tryGet(p_258390_).isEmpty() && p_259490_.test(p_258381_) && itementity.closerThan(p_258381_, (double) p_259054_) && p_258381_.level().getWorldBorder().isWithinBounds(itementity.blockPosition())) {
-                        // CraftBukkit start
-                        if (p_258381_ instanceof net.minecraft.world.entity.animal.allay.Allay) {
-                            var event = CraftEventFactory.callEntityTargetEvent(p_258381_, itementity, EntityTargetEvent.TargetReason.CLOSEST_ENTITY);
+            return p_258371_.group(p_258371_.registered(MemoryModuleType.LOOK_TARGET), behaviorbuilder, p_258371_.present(MemoryModuleType.NEAREST_VISIBLE_WANTED_ITEM), p_258371_.registered(MemoryModuleType.ITEM_PICKUP_COOLDOWN_TICKS)).apply(p_258371_, (p_258387_, p_258388_, p_258389_, p_258390_) -> (p_258380_, p_258381_, p_258382_) -> {
+                ItemEntity itementity = p_258371_.get(p_258389_);
+                if (p_258371_.tryGet(p_258390_).isEmpty() && p_259490_.test(p_258381_) && itementity.closerThan(p_258381_, (double) p_259054_) && p_258381_.level().getWorldBorder().isWithinBounds(itementity.blockPosition())) {
+                    // CraftBukkit start
+                    if (p_258381_ instanceof net.minecraft.world.entity.animal.allay.Allay) {
+                        var event = CraftEventFactory.callEntityTargetEvent(p_258381_, itementity, EntityTargetEvent.TargetReason.CLOSEST_ENTITY);
 
-                            if (event.isCancelled()) {
-                                return false;
-                            }
-                            if (!(event.getTarget() instanceof ItemEntity)) {
-                                p_258389_.erase();
-                            }
-
-                            itementity = (ItemEntity) ((CraftEntity) event.getTarget()).getHandle();
+                        if (event.isCancelled()) {
+                            return false;
                         }
-                        // CraftBukkit end
+                        if (!(event.getTarget() instanceof ItemEntity)) {
+                            p_258389_.erase();
+                        }
 
-                        WalkTarget walktarget = new WalkTarget(new EntityTracker(itementity, false), p_260346_, 0);
-                        p_258387_.set(new EntityTracker(itementity, true));
-                        p_258388_.set(walktarget);
-                        return true;
-                    } else {
-                        return false;
+                        itementity = (ItemEntity) ((CraftEntity) event.getTarget()).getHandle();
                     }
-                };
+                    // CraftBukkit end
+
+                    WalkTarget walktarget = new WalkTarget(new EntityTracker(itementity, false), p_260346_, 0);
+                    p_258387_.set(new EntityTracker(itementity, true));
+                    p_258388_.set(walktarget);
+                    return true;
+                } else {
+                    return false;
+                }
             });
         });
     }

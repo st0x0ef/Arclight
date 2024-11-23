@@ -28,9 +28,8 @@ public class ForgeLikeProvider {
         MavenDownloader forge = new MavenDownloader(Mirrors.getMavenRepo(), coord, dist, hash);
         return MinecraftProvider.reportSupply(pool, logger).apply(forge).thenCombineAsync(minecraftData, (path, data) -> {
             try (var jarFile = new JarFile(path.toFile())) {
-                Map<String, Map.Entry<String, String>> map = new HashMap<>();
                 var profile = jarFile.getEntry("install_profile.json");
-                map.putAll(profileLibraries(new InputStreamReader(jarFile.getInputStream(profile)), info.installer.minecraft, data));
+                Map<String, Map.Entry<String, String>> map = new HashMap<>(profileLibraries(new InputStreamReader(jarFile.getInputStream(profile)), info.installer.minecraft, data));
                 var version = jarFile.getEntry("version.json");
                 map.putAll(profileLibraries(new InputStreamReader(jarFile.getInputStream(version)), info.installer.minecraft, data));
                 List<Supplier<Path>> suppliers = MinecraftProvider.checkMaven(map);

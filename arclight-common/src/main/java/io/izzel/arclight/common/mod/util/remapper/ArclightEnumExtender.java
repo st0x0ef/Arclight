@@ -140,6 +140,6 @@ public class ArclightEnumExtender {
         if (candidates.size() != 1) {
             throw new RuntimeException("No $VALUES candidate found in enum class " + node.name);
         }
-        return candidates.get(0);
+        return candidates.getFirst();
     }
 }

@@ -78,8 +78,7 @@ public class AsyncCatcher implements Implementer {
             boolean found = false;
             List<MethodNode> methods = node.methods;
             // concurrent modification
-            for (int i = 0, methodsSize = methods.size(); i < methodsSize; i++) {
-                MethodNode method = methods.get(i);
+            for (MethodNode method : methods) {
                 String reason = map.get(method.name + method.desc);
                 if (reason != null) {
                     found = true;

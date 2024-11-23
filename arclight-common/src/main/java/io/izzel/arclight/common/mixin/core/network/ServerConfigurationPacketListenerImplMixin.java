@@ -12,7 +12,6 @@ import net.minecraft.server.network.ServerConfigurationPacketListenerImpl;
 import net.minecraft.server.players.PlayerList;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v.CraftServerLinks;
-import org.bukkit.craftbukkit.v.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerLinksSendEvent;
 import org.spongepowered.asm.mixin.Mixin;

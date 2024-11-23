@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Mixin(DecoratedPotBlockEntity.class)
@@ -25,7 +25,7 @@ public abstract class DecoratedPotBlockEntityMixin extends BlockEntityMixin impl
 
     @Override
     public List<ItemStack> getContents() {
-        return Arrays.asList(this.item);
+        return Collections.singletonList(this.item);
     }
 
     @Override

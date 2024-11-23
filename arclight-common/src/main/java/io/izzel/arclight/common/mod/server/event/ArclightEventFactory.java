@@ -132,7 +132,7 @@ public abstract class ArclightEventFactory {
         if (blocks.size() > 1) {
             placeEvent = CraftEventFactory.callBlockMultiPlaceEvent(world, player, enumhand, blocks, blockposition.getX(), blockposition.getY(), blockposition.getZ());
         } else if (blocks.size() == 1) {
-            placeEvent = CraftEventFactory.callBlockPlaceEvent(world, player, enumhand, blocks.get(0), blockposition.getX(), blockposition.getY(), blockposition.getZ());
+            placeEvent = CraftEventFactory.callBlockPlaceEvent(world, player, enumhand, blocks.getFirst(), blockposition.getX(), blockposition.getY(), blockposition.getZ());
         }
 
         if (placeEvent != null && (placeEvent.isCancelled() || !placeEvent.canBuild())) {
